@@ -1,12 +1,12 @@
 {
   "files": {
     "main.css": "/r3f-shadow/static/css/main.fa5a824f.css",
-    "main.js": "/r3f-shadow/static/js/main.a93da8b1.js",
+    "main.js": "/r3f-shadow/static/js/main.e51f99d8.js",
     "static/js/27.74c790ee.chunk.js": "/r3f-shadow/static/js/27.74c790ee.chunk.js",
     "index.html": "/r3f-shadow/index.html"
   },
   "entrypoints": [
     "static/css/main.fa5a824f.css",
-    "static/js/main.a93da8b1.js"
+    "static/js/main.e51f99d8.js"
   ]
 }
