@@ -1,18 +1,17 @@
-import { useEffect, useRef, VFC } from 'react';
+import { useRef, VFC } from 'react';
 import * as THREE from 'three';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import { Mouse2D } from '../../modules/mouse2d';
 
 export const Lights: VFC = () => {
+	const ref = useRef<THREE.DirectionalLight>(null)
 	const boundary = 15
 
-	const ref = useRef<THREE.DirectionalLight>(null)
-	const { scene } = useThree()
-
-	useEffect(() => {
-		const helper = new THREE.CameraHelper(ref.current!.shadow.camera)
-		// scene.add(helper)
-	}, [scene])
+	// const { scene } = useThree()
+	// useEffect(() => {
+	// 	const helper = new THREE.CameraHelper(ref.current!.shadow.camera)
+	// 	scene.add(helper)
+	// }, [scene])
 
 	const mouse2d = Mouse2D.instance
 

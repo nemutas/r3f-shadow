@@ -1,7 +1,7 @@
-import { useMemo, VFC } from 'react';
+import { VFC } from 'react';
 import * as THREE from 'three';
 import {
-	CylinderArgs, Debug, Physics, useBox, useCylinder, usePlane, useSphere
+	CylinderArgs, Physics, useBox, useCylinder, usePlane, useSphere
 } from '@react-three/cannon';
 import { Box, Cylinder, Sphere } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
@@ -70,7 +70,7 @@ const randomPosition = () => [clampedRandom(-3, 3), clampedRandom(10, 15), clamp
 
 const PhysicalBox: VFC<{ emissive: THREE.ColorRepresentation }> = ({ emissive }) => {
 	const size = clampedRandom(1, 2)
-	const [ref, api] = useBox(() => ({
+	const [ref] = useBox(() => ({
 		mass: 1,
 		args: [size, size, size],
 		position: randomPosition(),
@@ -87,7 +87,7 @@ const PhysicalBox: VFC<{ emissive: THREE.ColorRepresentation }> = ({ emissive })
 
 const PhysicalSphere: VFC<{ emissive: THREE.ColorRepresentation }> = ({ emissive }) => {
 	const size = clampedRandom(0.7, 1.5)
-	const [ref, api] = useSphere(() => ({
+	const [ref] = useSphere(() => ({
 		mass: 1,
 		args: [size],
 		position: randomPosition(),
@@ -105,7 +105,7 @@ const PhysicalSphere: VFC<{ emissive: THREE.ColorRepresentation }> = ({ emissive
 const PhysicalTetrahedron: VFC<{ emissive: THREE.ColorRepresentation }> = ({ emissive }) => {
 	const size = clampedRandom(1, 2)
 	const args: CylinderArgs = [0.001, size, Math.sqrt(2) * size, 3]
-	const [ref, api] = useCylinder(() => ({
+	const [ref] = useCylinder(() => ({
 		mass: 1,
 		args,
 		position: randomPosition(),

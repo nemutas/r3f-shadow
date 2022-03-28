@@ -1,13 +1,8 @@
 import { VFC } from 'react';
-import { css } from '@emotion/css';
-import { Stats } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { Floor } from './Floor';
 import { Lights } from './Lights';
 import { PhysicalObjects } from './PhysicalObjects';
-import { ConstantNoisePass } from './postprocessing/ConstantNoisePass';
-import { DiagonalLinePass } from './postprocessing/DiagonalLinePass';
-import { Effects } from './postprocessing/Effects';
 
 type TCanvasProps = {
 	containerRef: React.RefObject<HTMLDivElement>
