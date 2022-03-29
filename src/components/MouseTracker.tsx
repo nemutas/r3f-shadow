@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, VFC } from 'react';
-import * as THREE from 'three';
 import { css } from '@emotion/css';
 import { Mouse2D } from '../modules/mouse2d';
 import { state } from '../modules/store';
