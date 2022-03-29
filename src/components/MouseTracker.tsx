@@ -4,28 +4,32 @@ import { css } from '@emotion/css';
 import { Mouse2D } from '../modules/mouse2d';
 import { state } from '../modules/store';
 
-export const MouseCircle: VFC = () => {
+export const MouseTracker: VFC = () => {
 	const ref = useRef<HTMLDivElement>(null)
+	const animationID = useRef<number | null>(null)
 
 	useEffect(() => {
 		const mouse2d = Mouse2D.instance
-		const pos = () => [mouse2d.relativePosition.x + window.pageXOffset, mouse2d.relativePosition.y + window.pageYOffset]
-		const vec2 = new THREE.Vector2(...pos())
+		const vec2 = mouse2d.absolutePosition
 
 		const anime = () => {
-			const mPos = vec2.lerp(new THREE.Vector2(...pos()), 0.5)
-			ref.current!.style.setProperty('--px', mPos.x + 'px')
-			ref.current!.style.setProperty('--py', mPos.y + 'px')
+			const mPos = vec2.lerp(mouse2d.absolutePosition, 0.5)
+			ref.current!.style.setProperty('--mx', mPos.x + 'px')
+			ref.current!.style.setProperty('--my', mPos.y + 'px')
 
 			if (state.hoverLink && !ref.current!.classList.contains('active')) {
-				state.hoverLink && ref.current!.classList.add('active')
+				ref.current!.classList.add('active')
 			} else if (!state.hoverLink && ref.current!.classList.contains('active')) {
 				ref.current!.classList.remove('active')
 			}
 
-			requestAnimationFrame(anime)
+			animationID.current = requestAnimationFrame(anime)
 		}
 		anime()
+
+		return () => {
+			animationID.current && cancelAnimationFrame(animationID.current)
+		}
 	}, [])
 
 	return <div ref={ref} className={styles.container} />
@@ -34,8 +38,8 @@ export const MouseCircle: VFC = () => {
 const styles = {
 	container: css`
 		position: absolute;
-		top: var(--py);
-		left: var(--px);
+		top: var(--my);
+		left: var(--mx);
 		transform: translate(-50%, -50%);
 		pointer-events: none;
 		width: 30px;

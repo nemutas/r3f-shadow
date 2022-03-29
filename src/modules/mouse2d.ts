@@ -3,7 +3,6 @@ import * as THREE from 'three';
 export class Mouse2D {
 	private static _instance: Mouse2D | null
 	private _relativePosition = new THREE.Vector2(0, 0)
-	private _absolutePosition = new THREE.Vector2(0, 0)
 
 	private constructor() {
 		window.addEventListener('mousemove', this._handleMouseMove)
@@ -18,13 +17,13 @@ export class Mouse2D {
 
 	private _handleMouseMove = (e: MouseEvent) => {
 		this._relativePosition.set(e.clientX, e.clientY)
-		this._absolutePosition.set(e.offsetX, e.offsetY)
 	}
 
 	get normalizedPosition() {
-		const x = (this._relativePosition.x / window.innerWidth) * 2 - 1
-		const y = (this._relativePosition.y / window.innerHeight) * 2 - 1
-		return new THREE.Vector2(x, y)
+		return new THREE.Vector2(
+			(this._relativePosition.x / window.innerWidth) * 2 - 1,
+			(this._relativePosition.y / window.innerHeight) * 2 - 1
+		)
 	}
 
 	get relativePosition() {
@@ -32,7 +31,10 @@ export class Mouse2D {
 	}
 
 	get absolutePosition() {
-		return this._absolutePosition.clone()
+		return new THREE.Vector2(
+			this._relativePosition.x + window.pageXOffset,
+			this._relativePosition.y + window.pageYOffset
+		)
 	}
 
 	dispose = () => {

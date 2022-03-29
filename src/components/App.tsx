@@ -2,7 +2,7 @@ import React, { useRef, VFC } from 'react';
 import { css } from '@emotion/css';
 import { BackgroundText } from './BackgroundText';
 import { LinkIconButton } from './LinkIconButton';
-import { MouseCircle } from './MouseCircle';
+import { MouseTracker } from './MouseTracker';
 import { TCanvas } from './three/TCanvas';
 
 export const App: VFC = () => {
@@ -11,7 +11,7 @@ export const App: VFC = () => {
 	return (
 		<div ref={ref} className={styles.container}>
 			<BackgroundText />
-			<MouseCircle />
+			<MouseTracker />
 			<LinkIconButton imagePath="/assets/icons/github.svg" linkPath="https://github.com/nemutas/r3f-shadow" />
 			<TCanvas containerRef={ref} />
 		</div>
